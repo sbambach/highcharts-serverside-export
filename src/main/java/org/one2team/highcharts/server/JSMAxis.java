@@ -1,18 +1,14 @@
 package org.one2team.highcharts.server;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
-
+import com.google.gwt.shared.Array;
 import org.one2team.highcharts.shared.Axis;
 import org.one2team.highcharts.shared.DateTimeLabelFormats;
 import org.one2team.highcharts.shared.Style;
 import org.one2team.highcharts.shared.Title;
+import org.one2team.utils.JSMArray;
 import org.one2team.utils.JSMArrayString;
 
-import com.google.gwt.shared.Array;
+import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class JSMAxis extends JSMBaseObject implements Axis {
@@ -56,7 +52,13 @@ public class JSMAxis extends JSMBaseObject implements Axis {
     this.min = min;
     return this;
   }
-  
+
+  @Override
+  public Axis setMinRange (double minRange) {
+      this.minRange = minRange;
+      return this;
+  }
+
   @Override
   public Axis setMax (double max) {
     this.max = max;
@@ -77,6 +79,12 @@ public class JSMAxis extends JSMBaseObject implements Axis {
   }
 
   @Override
+  public Axis setMinorTickInterval (double minorTickInterval) {
+      this.minorTickInterval = minorTickInterval;
+      return this;
+  }
+
+  @Override
   public Axis setStartOnTick (boolean startOnTick) {
     this.startOnTick = startOnTick;
     return this;
@@ -93,11 +101,27 @@ public class JSMAxis extends JSMBaseObject implements Axis {
     this.plotLines = plotLines;
     return this;
   }
-  
+
+  @Override
+  public Axis setPlotBands (Array<PlotBands> plotBands) {
+      this.plotBands = plotBands;
+      return this;
+  }
+
   @SuppressWarnings("unchecked")
   @Override
-  public Array<PlotLines> getPlotLines () {
-    return (Array<PlotLines>) plotLines;
+  public JSMArray<PlotLines> getPlotLines () {
+      if (plotLines == null)
+          plotLines = new JSMArray<PlotLines> ();
+      return (JSMArray<PlotLines>) plotLines;
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public JSMArray<PlotBands> getPlotBands () {
+      if (plotBands == null)
+          plotBands = new JSMArray<PlotBands> ();
+      return (JSMArray<PlotBands>) plotBands;
   }
 
   @Override
@@ -132,7 +156,12 @@ public class JSMAxis extends JSMBaseObject implements Axis {
   public double getMin () {
     return min;
   }
-  
+
+  @Override
+  public double getMinRange () {
+      return minRange;
+  }
+
   @Override
   public double getMax () {
     return max;
@@ -141,6 +170,11 @@ public class JSMAxis extends JSMBaseObject implements Axis {
   @Override
   public double getTickInterval () {
     return tickInterval;
+  }
+
+  @Override
+  public double getMinorTickInterval () {
+      return minorTickInterval;
   }
 
   @Override
@@ -158,11 +192,17 @@ public class JSMAxis extends JSMBaseObject implements Axis {
   public Double tickInterval;
 
   @XmlElement
+  public Double minorTickInterval;
+
+  @XmlElement
   public Boolean showFirstLabel;
 
   @XmlElement
   public Double min;
-  
+
+  @XmlElement
+  public Double minRange;
+
   @XmlElement
   public Double max;
 
@@ -177,7 +217,11 @@ public class JSMAxis extends JSMBaseObject implements Axis {
   @XmlTransient
   public Object categories;
 
+  @XmlElements(@XmlElement(name = "plotLines", type = JSMPlotLines.class))
   public  Object plotLines;
+
+  @XmlElements(@XmlElement(name = "plotBands", type = JSMPlotBands.class))
+  public  Object plotBands;
 
   public JSMTitle title;
   
@@ -295,9 +339,9 @@ public class JSMAxis extends JSMBaseObject implements Axis {
       return zindex;
     }
 
-    public int zindex;
-    public int width;
-    public double value;
+    public Integer zindex;
+    public Integer width;
+    public Double value;
     public String id;
     public String color;
     public String dashStyle;
@@ -409,5 +453,191 @@ public class JSMAxis extends JSMBaseObject implements Axis {
 
     }
   }
+    public static class JSMPlotBands extends JSMBaseObject implements PlotBands {
 
+        public JSMPlotBands () {
+            this.label = new JSMLabel ();
+        }
+
+        @Override
+        public JSMPlotBands setLabel (Label label) {
+            this.label = label;
+            return this;
+        }
+
+        @Override
+        public Label getLabel () {
+            if (label == null)
+                label = new JSMLabel();
+            return label;
+        }
+
+        @Override
+        public JSMPlotBands setColor (String color) {
+            this.color = color;
+            return this;
+        }
+
+        @Override
+        public String getColor () {
+            return color;
+        }
+
+        @Override
+        public JSMPlotBands setId (String id) {
+            this.id = id;
+            return this;
+        }
+
+        @Override
+        public String getId () {
+            return id;
+        }
+
+        @Override
+        public JSMPlotBands setFrom (double from) {
+            this.from = from;
+            return this;
+        }
+
+        @Override
+        public double getFrom () {
+            return from;
+        }
+
+        @Override
+        public JSMPlotBands setTo (double to) {
+            this.to = to;
+            return this;
+        }
+
+        @Override
+        public double getTo () {
+            return to;
+        }
+
+        @Override
+        public JSMPlotBands setZIndex (int zindex) {
+            this.zindex = zindex;
+            return this;
+        }
+
+        @Override
+        public int getZIndex () {
+            return zindex;
+        }
+
+        public Integer zindex;
+        public Double to;
+        public Double from;
+        public String id;
+        public String color;
+        public Label label;
+
+        public static class JSMLabel extends JSMBaseObject implements Label {
+
+            public JSMLabel () {
+                style = new JSMStyle ();
+            }
+            @Override
+            public Label setAlign (String align) {
+                this.align = align;
+                return this;
+            }
+
+            @Override
+            public String getAlign () {
+                return align;
+            }
+
+            @Override
+            public Label setVerticalAlign (String verticalAlign) {
+                this.verticalAlign = verticalAlign;
+                return this;
+            }
+
+            @Override
+            public String getVerticalAlign () {
+                return verticalAlign;
+            }
+
+            @Override
+            public Label setRotation (double rotation) {
+                this.rotation = rotation;
+                return this;
+            }
+
+            @Override
+            public double getRotation () {
+                return rotation;
+            }
+
+            @Override
+            public Label setText (String text) {
+                this.text = text;
+                return this;
+            }
+
+            @Override
+            public String getText () {
+                return text;
+            }
+
+            @Override
+            public Label setTextAlign (String textAlign) {
+                this.textAlign = textAlign;
+                return this;
+            }
+
+            @Override
+            public String getTextAlign () {
+                return textAlign;
+            }
+
+            @Override
+            public Label setX (double x) {
+                this.x = x;
+                return this;
+            }
+
+            @Override
+            public double getX () {
+                return x;
+            }
+
+            @Override
+            public Label setY (double y) {
+                this.y = y;
+                return this;
+            }
+
+            @Override
+            public double getY () {
+                return y;
+            }
+
+
+            @Override
+            public Label setStyle (Style style) {
+                this.style = style;
+                return this;
+            }
+
+            @Override
+            public Style getStyle () {
+                return style;
+            }
+
+
+            public String align;
+            public String verticalAlign;
+            public double rotation;
+            public String text;
+            public String textAlign;
+            public double x;
+            public double y;
+            public Style style;
+
+        }
+    }
 }

@@ -29,13 +29,15 @@ public interface PlotOptions {
     double getFillOpacity();
     
     boolean isAllowPointSelect ();
-    
+
+    boolean isAnimation ();
+
     DataLabels getDataLabels ();
     
     boolean isShadow ();
     
     int getLineWidth ();
-    
+
     Series setStates (States states);
     
     Series setStacking (String stacking);
@@ -43,7 +45,9 @@ public interface PlotOptions {
     Series setFillOpacity (double fillOpacity);
     
     Series setAllowPointSelect (boolean allowPointSelect);
-    
+
+    Series setAnimation(boolean animation);
+
     Series setShadow (boolean shadow);
     
     Series setLineWidth (int lineWidth);
@@ -51,7 +55,15 @@ public interface PlotOptions {
   	Series setBorderWidth (int borderWidth);
     
     int getBorderWidth ();
-    
+
+    Series setShowInLegend(boolean showInLegend);
+
+    boolean isShowInLegend ();
+
+    Series setEnableMouseTracking(boolean enableMouseTracking);
+
+    boolean isEnableMouseTracking();
+
     public interface States {
       
       Select getSelect ();
@@ -121,7 +133,15 @@ public interface PlotOptions {
       Marker setSymbol (String symbol);
       
       String getSymbol ();
-      
+
+      int getLineWidth ();
+
+      Marker setLineWidth (int lineWidth);
+
+      double getRadius ();
+
+      Marker setRadius (double radius);
+
       public interface States {
         
         Select getSelect ();

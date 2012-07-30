@@ -1,11 +1,11 @@
 package org.one2team.highcharts.server;
 
+import org.one2team.highcharts.shared.PlotOptions;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-
-import org.one2team.highcharts.shared.PlotOptions;
 
 @XmlAccessorType(XmlAccessType.NONE)
 public class JSMPlotOptions extends JSMBaseObject implements PlotOptions {
@@ -79,16 +79,27 @@ public class JSMPlotOptions extends JSMBaseObject implements PlotOptions {
     }
   
     @Override
-    public boolean isAllowPointSelect () {
-      return this.allowPointSelect;
+    public boolean isAnimation () {
+      return this.animation;
     }
   
     @Override
-    public JSMSeries setAllowPointSelect (boolean allowPointSelect) {
-      this.allowPointSelect = allowPointSelect;
-			return this;
+    public JSMSeries setAnimation(boolean animation) {
+      this.animation = animation;
+      return this;
     }
-  
+
+    @Override
+    public boolean isAllowPointSelect () {
+        return this.allowPointSelect;
+    }
+
+    @Override
+    public JSMSeries setAllowPointSelect (boolean allowPointSelect) {
+        this.allowPointSelect = allowPointSelect;
+        return this;
+    }
+
     @Override
     @XmlElement
     public JSMSeries setStacking (String stacking) {
@@ -167,8 +178,30 @@ public class JSMPlotOptions extends JSMBaseObject implements PlotOptions {
 		public int getBorderWidth() {
 			return borderWidth;
 		}
-  
-    @XmlElement(type = JSMStates.class)
+
+      @Override
+      public Series setShowInLegend(boolean showInLegend) {
+          this.showInLegend = showInLegend;
+          return this;
+      }
+
+      @Override
+      public boolean isShowInLegend() {
+          return showInLegend;
+      }
+
+      @Override
+      public Series setEnableMouseTracking(boolean enableMouseTracking) {
+          this.enableMouseTracking = enableMouseTracking;
+          return this;
+      }
+
+      @Override
+      public boolean isEnableMouseTracking() {
+          return enableMouseTracking;
+      }
+
+      @XmlElement(type = JSMStates.class)
     public States states;
     
     public JSMDataLabels dataLabels;
@@ -179,10 +212,19 @@ public class JSMPlotOptions extends JSMBaseObject implements PlotOptions {
     
     @XmlElement
     public Boolean allowPointSelect;
-    
+
+    @XmlElement
+    public Boolean animation;
+
     @XmlElement
     public Boolean shadow;
-    
+
+    @XmlElement
+    public Boolean showInLegend;
+
+    @XmlElement
+    public Boolean enableMouseTracking;
+
     @XmlElement
     public Integer lineWidth;
     
@@ -380,7 +422,29 @@ public class JSMPlotOptions extends JSMBaseObject implements PlotOptions {
       public String getSymbol () {
         return symbol;
       }
-      
+
+      @Override
+      public int getLineWidth() {
+          return lineWidth;
+      }
+
+      @Override
+      public Marker setLineWidth(int lineWidth) {
+          this.lineWidth = lineWidth;
+          return this;
+      }
+
+      @Override
+      public double getRadius() {
+          return radius;
+      }
+
+      @Override
+      public Marker setRadius(double radius) {
+          this.radius = radius;
+          return this;
+      }
+
       @Override
       public Marker setSymbol (String symbol) {
         this.symbol = symbol;
@@ -392,7 +456,11 @@ public class JSMPlotOptions extends JSMBaseObject implements PlotOptions {
       public boolean enabled;
       
       public JSMStates states;
-      
+
+      public Integer lineWidth;
+
+      public Double radius;
+
       public static class JSMStates extends JSMBaseObject implements States {
   
         public JSMStates () {

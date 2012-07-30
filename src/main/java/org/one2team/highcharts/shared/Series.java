@@ -7,7 +7,9 @@ import com.google.gwt.shared.Array;
 public interface Series {
   
   Array<Point> getData ();
-  
+
+  PlotOptions.Series.Marker getMarker ();
+
   Series setData (Array<Point> data);
 
   String getName ();
@@ -37,6 +39,10 @@ public interface Series {
   String getSize ();
 
   Series setSize (String size);
+
+  int getLineWidth ();
+
+  Series setLineWidth (int lineWidth);
 
   Series setCenter (String centerX, String centerY);
   

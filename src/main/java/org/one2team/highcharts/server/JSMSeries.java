@@ -1,12 +1,6 @@
 package org.one2team.highcharts.server;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
-
+import com.google.gwt.shared.Array;
 import org.one2team.highcharts.server.JSMPlotOptions.JSMSeries.JSMStates;
 import org.one2team.highcharts.shared.PlotOptions.Series.States;
 import org.one2team.highcharts.shared.Point;
@@ -14,7 +8,7 @@ import org.one2team.highcharts.shared.Series;
 import org.one2team.utils.JSMArray;
 import org.one2team.utils.JSMArrayString;
 
-import com.google.gwt.shared.Array;
+import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(namespace = "chartoptions")
@@ -40,6 +34,13 @@ public class JSMSeries extends JSMBaseObject implements Series {
     if (data == null)
       data = new JSMArray<Point> ();
     return (JSMArray<Point>) data;
+  }
+
+  @Override
+  public JSMPlotOptions.JSMSeries.JSMMarker getMarker () {
+      if (this.marker == null)
+          this.marker = new JSMPlotOptions.JSMSeries.JSMMarker();
+      return marker;
   }
 
   @Override
@@ -88,6 +89,12 @@ public class JSMSeries extends JSMBaseObject implements Series {
   }
 
   @Override
+  public Series setLineWidth (int lineWidth) {
+      this.lineWidth = lineWidth;
+      return this;
+  }
+
+  @Override
   public String getCenterX () {
     return (center != null) ? center.getX () : null;
   }
@@ -100,6 +107,11 @@ public class JSMSeries extends JSMBaseObject implements Series {
   @Override
   public String getSize () {
     return size;
+  }
+
+  @Override
+  public int getLineWidth () {
+      return lineWidth;
   }
 
   @Override
@@ -121,6 +133,8 @@ public class JSMSeries extends JSMBaseObject implements Series {
   @XmlElements(@XmlElement(name = "data", type = JSMPoint.class))
   public Object data;
 
+  public JSMPlotOptions.JSMSeries.JSMMarker marker;
+
   @XmlElement
   public String color;
 
@@ -132,7 +146,10 @@ public class JSMSeries extends JSMBaseObject implements Series {
 
   @XmlElement
   public String size;
-  
+
+  @XmlElement
+  public Integer lineWidth;
+
   public JSMCenter center;
 
   public static class JSMCenter extends JSMArrayString {
