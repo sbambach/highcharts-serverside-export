@@ -2,179 +2,206 @@ package org.one2team.highcharts.shared;
 
 public interface PlotOptions {
 
-	Series getArea();
+    Series getArea();
 
-	Series getAreaspline();
+    Series getAreaspline();
 
-	Series getBar ();
-	
-	Series getColumn ();
-  
-	Series getLine ();
-  
-	Series getPie ();
-  
-	Series getSeries ();
-  
-	Series getSpline ();
+    Series getBar();
 
-	public interface Series {
-    
-    Marker getMarker ();
-    
-    String getStacking ();
-    
-    States getStates();
-    
-    double getFillOpacity();
-    
-    boolean isAllowPointSelect ();
+    Series getColumn();
 
-    boolean isAnimation ();
+    Series getLine();
 
-    DataLabels getDataLabels ();
-    
-    boolean isShadow ();
-    
-    int getLineWidth ();
+    Series getPie();
 
-    Series setStates (States states);
-    
-    Series setStacking (String stacking);
-    
-    Series setFillOpacity (double fillOpacity);
-    
-    Series setAllowPointSelect (boolean allowPointSelect);
+    Series getSeries();
 
-    Series setAnimation(boolean animation);
+    Series getSpline();
 
-    Series setShadow (boolean shadow);
-    
-    Series setLineWidth (int lineWidth);
-    
-  	Series setBorderWidth (int borderWidth);
-    
-    int getBorderWidth ();
+    public interface Series {
 
-    Series setShowInLegend(boolean showInLegend);
+        Marker getMarker();
 
-    boolean isShowInLegend ();
+        String getStacking();
 
-    Series setEnableMouseTracking(boolean enableMouseTracking);
+        States getStates();
 
-    boolean isEnableMouseTracking();
+        double getFillOpacity();
 
-    public interface States {
-      
-      Select getSelect ();
-      
-      public interface Select {
-        
-        String getBorderColor ();
+        boolean isAllowPointSelect();
 
-        String getColor ();
+        boolean isAnimation();
 
-        int getBorderWidth ();
-        
-        Select setBorderColor (String borderColor);
-        
-        Select setColor (String color);
-        
-        Select setBorderWidth (int borderWidth);
-      }
-      
-    }
-    
-    public interface DataLabels {
+        DataLabels getDataLabels();
 
-      DataLabels setColor (String color);
-      
-      DataLabels setDistance (int distance);
+        boolean isShadow();
 
-      DataLabels setEnabled (boolean enabled);
+        int getLineWidth();
 
-      DataLabels setFormatter (Object createBasicPercentFormatter);
+        Series setStates(States states);
 
-      DataLabels setY (int y);
+        Series setStacking(String stacking);
 
-      DataLabels setX (int x);
-      
-      DataLabels setAlign (String align);
-      
-      DataLabels setRotation (double rotation);
-      
-      String getColor ();
+        Series setFillOpacity(double fillOpacity);
 
-      int getDistance ();
+        Series setAllowPointSelect(boolean allowPointSelect);
 
-      boolean isEnabled ();
+        Series setAnimation(boolean animation);
 
-      Object getFormatter ();
+        Series setShadow(boolean shadow);
 
-      int getY ();
+        Series setLineWidth(int lineWidth);
 
-      int getX ();
+        Series setBorderWidth(int borderWidth);
 
-      double getRotation ();
-      
-      String getAlign ();
+        int getBorderWidth();
 
-      
-    }
-    
-    public interface Marker {
-      
-      boolean isEnabled ();
-      
-      Marker setEnabled (boolean enabled);
-      
-      States getStates ();
-      
-      Marker setSymbol (String symbol);
-      
-      String getSymbol ();
+        Series setShowInLegend(boolean showInLegend);
 
-      int getLineWidth ();
+        boolean isShowInLegend();
 
-      Marker setLineWidth (int lineWidth);
+        Series setEnableMouseTracking(boolean enableMouseTracking);
 
-      double getRadius ();
+        boolean isEnableMouseTracking();
 
-      Marker setRadius (double radius);
+        public interface States {
 
-      public interface States {
-        
-        Select getSelect ();
-        
-        Hover getHover ();
-        
-        public interface Hover {
-          
-          boolean isEnabled ();
-          
-          Hover setEnabled (boolean enabled);
+            Select getSelect();
 
-        }
-        
-        public interface Select {
-          
-          Select setFillColor (String fillColor);
-          
-          Select setLineWidth (int lineWidth);
-          
-          Select setLineColor (String lineColor);
-          
-          String getFillColor ();
-          
-          String getLineColor ();
-          
-          int getLineWidth ();
+            Hover getHover();
+
+            public interface Select {
+
+                String getBorderColor();
+
+                String getColor();
+
+                int getBorderWidth();
+
+                Select setBorderColor(String borderColor);
+
+                Select setColor(String color);
+
+                Select setBorderWidth(int borderWidth);
+            }
+
+            public interface Hover {
+
+                boolean isEnabled();
+
+                Hover setEnabled(boolean enabled);
+
+                Hover setLineWidth(int lineWidth);
+
+                int getLineWidth();
+
+                Hover setBrightness(double brightness);
+
+                double getBrightness();
+
+                Marker getMarker();
+            }
 
         }
 
-      }
+        public interface DataLabels {
+
+            DataLabels setColor(String color);
+
+            DataLabels setDistance(int distance);
+
+            DataLabels setEnabled(boolean enabled);
+
+            DataLabels setFormatter(Object createBasicPercentFormatter);
+
+            DataLabels setY(int y);
+
+            DataLabels setX(int x);
+
+            DataLabels setAlign(String align);
+
+            DataLabels setRotation(double rotation);
+
+            String getColor();
+
+            int getDistance();
+
+            boolean isEnabled();
+
+            Object getFormatter();
+
+            int getY();
+
+            int getX();
+
+            double getRotation();
+
+            String getAlign();
+
+
+        }
+
+        public interface Marker {
+
+            boolean isEnabled();
+
+            Marker setEnabled(boolean enabled);
+
+            States getStates();
+
+            Marker setSymbol(String symbol);
+
+            String getSymbol();
+
+            int getLineWidth();
+
+            Marker setLineWidth(int lineWidth);
+
+            String getLineColor();
+
+            Marker setLineColor(String lineColor);
+
+            String getFillColor();
+
+            Marker setFillColor(String fillColor);
+
+            double getRadius();
+
+            Marker setRadius(double radius);
+
+            public interface States {
+
+                Select getSelect();
+
+                Hover getHover();
+
+                public interface Hover {
+
+                    boolean isEnabled();
+
+                    Hover setEnabled(boolean enabled);
+
+                }
+
+                public interface Select {
+
+                    Select setFillColor(String fillColor);
+
+                    Select setLineWidth(int lineWidth);
+
+                    Select setLineColor(String lineColor);
+
+                    String getFillColor();
+
+                    String getLineColor();
+
+                    int getLineWidth();
+
+                }
+
+            }
+        }
+
     }
-    
-  }
-  
+
 }
